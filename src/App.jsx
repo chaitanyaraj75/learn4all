@@ -11,7 +11,6 @@ import Courses from './routes/Courses';
 import Contact from './routes/Contact';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <Routes>
