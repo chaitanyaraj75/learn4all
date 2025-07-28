@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
-=======
->>>>>>> 8fc0d4c21afe70bb4654f9cd58f47d567477aba1
+
 import { Routes, Route } from "react-router-dom";
 import Home from "./routes/Home";
 import About from "./routes/About";
