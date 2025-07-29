@@ -1,13 +1,21 @@
-import React from 'react'
+import { FaBookOpen, FaGlobe, FaVideo, FaLayerGroup } from 'react-icons/fa';
 
-const Feature = ({ icon, label }) => {
+const features = [
+  { icon: <FaBookOpen size={32} />, text: "Free Education" },
+  { icon: <FaGlobe size={32} />, text: "Accessible Anywhere" },
+  { icon: <FaVideo size={32} />, text: "Visual Learning" },
+  { icon: <FaLayerGroup size={32} />, text: "Subject-Wise Resources" },
+];
+
+export default function Feature() {
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-200 shadow-md rounded-full p-6  transition w-36 h-32 mx-auto text-center">
-        <span className="text-3xl mb-2">{icon}</span>
-        <span className="text-md font-medium">{label}</span>
+    <div className="flex justify-around items-center gap-4 py-8 flex-wrap">
+      {features.map((item, index) => (
+        <div key={index} className="flex flex-col items-center text-center px-4">
+          <div className="text-green-700 mb-2">{item.icon}</div>
+          <p className="text-md font-medium">{item.text}</p>
+        </div>
+      ))}
     </div>
-);
-  
+  );
 }
-
-export default Feature

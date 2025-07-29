@@ -1,7 +1,12 @@
 const courseData = [
   {
+<<<<<<< HEAD
     videoId: "vid1",
     title: "Numbers",
+=======
+    videoId: "dQw4w9WgXcQ",
+    title: "Mathematics - Numbers",
+>>>>>>> 78a33e4524f379a04f5cb56e45533694b0c2af21
     subject: "Mathematics",
     classLevel: "1",
     description: "Learn the basics of numbers and counting.",
