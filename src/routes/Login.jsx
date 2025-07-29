@@ -1,21 +1,31 @@
-// import { Helmet } from "react-helmet";
-// import React from "react";
-// import Navbar from "../component/Navbar";
-// import Footer from "../component/Footer";
-function Login(){
-    return (
-        <div>
-        <h1>Login Page</h1>
-        <p>Please enter your credentials to log in.</p>
-        {/* Add login form here */
-        <div className="form-box">
-      <h2>Create an Account</h2>
-      <p>Free learning resources for all classes</p>
-      <input type="text" placeholder="Full Name" />
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Confirm Password" />
-      <p>Already have an account?</p>
-      <button className="primary-btn">Sign Up</button>
+ import { Helmet } from "react-helmet";
+ import React from "react";
+ import Navbar from "../component/Navbar";
+import Footer from "../component/Footer";
+import React, { useState } from "react";
+
+function LoginForm({ setIsLogin }) {
+  // googleLogo should be imported or defined above, e.g.:
+  // import googleLogo from '../assets/google-logo.png';
+  return (
+    <div className="form-box">
+      <h2>Welcome Back!</h2>
+      <p>Login to access your courses</p>
+      <input type="email" placeholder="Enter your email" />
+      <input type="password" placeholder="Enter your password" />
+      
+      <button className="primary-btn">Login</button>
+     
+      <p className="signup-link">
+        Don't have an account?{" "}
+        <span
+          onClick={() => setIsLogin(false)}  
+          style={{ color: "orange", fontWeight: "bold", cursor: "pointer" }}
+        >
+          Sign up Now
+        </span>
+      </p>
+
       <div className="divider">OR</div>
       <button className="google-btn">
         <img
@@ -26,9 +36,20 @@ function Login(){
         Login with Google
       </button>
     </div>
-        }
-        </div>
-    );
+  );
+}
+
+function Login() {
+  const [isLogin, setIsLogin] = useState(true);
+
+  return (
+    <div>
+      <h1>Login Page</h1>
+      <p>Please enter your credentials to log in.</p>
+      {/* Add login form here */}
+      <LoginForm setIsLogin={setIsLogin} />
+    </div>
+  );
 }
 
 export default Login;
