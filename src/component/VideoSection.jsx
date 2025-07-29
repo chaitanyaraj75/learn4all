@@ -4,6 +4,7 @@ import { PlayCircle } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import courseData from "../data/courseData";
 
 const VideoSection = () => {
   const [currentVideo, setCurrentVideo] = useState(videoSectionData[0]);
@@ -15,7 +16,9 @@ const VideoSection = () => {
   useEffect(() => {
     const saved = localStorage.getItem("lastWatched");
     if (saved) {
-      const found = videoSectionData.find(v => v.videoId === JSON.parse(saved)?.videoId);
+      const found = videoSectionData.find(
+        (v) => v.videoId === JSON.parse(saved)?.videoId
+      );
       if (found) setCurrentVideo(found);
     }
     const stored = JSON.parse(localStorage.getItem("completed")) || [];
@@ -30,7 +33,7 @@ const VideoSection = () => {
     localStorage.setItem("completed", JSON.stringify([...updated]));
   }, [currentVideo]);
 
-  const filteredData = videoSectionData.filter(video => {
+  const filteredData = videoSectionData.filter((video) => {
     return (
       (subjectFilter === "" || video.subject === subjectFilter) &&
       (classFilter === "" || video.classLevel === classFilter)
@@ -47,7 +50,7 @@ const VideoSection = () => {
       <div className="flex flex-wrap gap-4 mb-6">
         <select
           className="bg-gray-800 px-4 py-2 rounded text-white"
-          onChange={e => setSubjectFilter(e.target.value)}
+          onChange={(e) => setSubjectFilter(e.target.value)}
           value={subjectFilter}
         >
           <option value="">All Subjects</option>
@@ -63,7 +66,7 @@ const VideoSection = () => {
 
         <select
           className="bg-gray-800 px-4 py-2 rounded text-white"
-          onChange={e => setClassFilter(e.target.value)}
+          onChange={(e) => setClassFilter(e.target.value)}
           value={classFilter}
         >
           <option value="">All Classes</option>
@@ -93,11 +96,10 @@ const VideoSection = () => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="w-full lg:w-1/3 space-y-3 max-h-[70vh] overflow-y-scroll scrollbar-hide"
-           style={{
-
-    scrollbarWidth: "none",        // Firefox
-    msOverflowStyle: "none",       // IE 10+
-  }}
+          style={{
+            scrollbarWidth: "none", // Firefox
+            msOverflowStyle: "none", // IE 10+
+          }}
         >
           {filteredData.map((video, index) => (
             <button
@@ -132,8 +134,8 @@ const VideoSection = () => {
         >
           <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-2xl">
             <iframe
-              src={`https://www.youtube.com/embed/${currentVideo.videoId}?autoplay=1`}
-              title={currentVideo.title}
+              src={`https://www.youtube.com/embed/${currentVideo.videoId}/?autoplay=1&controls=1&mute=1`}
+              title="Shapes and Space"
               className="w-full h-full"
               allow="autoplay; encrypted-media"
               allowFullScreen
