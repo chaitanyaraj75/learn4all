@@ -2,7 +2,7 @@ import Navbar from "../component/Navbar";
 import Course_card from "../component/Course_card";
 import Filter from "../component/Filter";
 import Footer from "../component/Footer";
-import courseData from "../data/courseData";
+import courseData from "../component/courseData.json";
 
 function Courses() {
   return (

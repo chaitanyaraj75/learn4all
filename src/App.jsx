@@ -16,7 +16,7 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/courses" element={<Courses />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/course/:videoId" element={<CourseDetails />} /> {/* ✅ New route */}
+      <Route path="/course/:videoId" element={<CourseDetails />} />
     </Routes>
   );
 }
