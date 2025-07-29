@@ -19,12 +19,8 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/courses" element={<Courses />} />
       <Route path="/contact" element={<Contact />} />
-<<<<<<< HEAD
-      <Route path="/course/:videoId" element={<CourseDetails />} />
-=======
       {/* <Route path="/:type/:id" element={<Details />} /> */}
       {/* <Route path="/search/:query" element={<Search />} /> */}
->>>>>>> 78a33e4524f379a04f5cb56e45533694b0c2af21
     </Routes>
   );
 }

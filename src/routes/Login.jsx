@@ -1,7 +1,7 @@
  import React, { useState } from "react";
 import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
-import googleLogo from "../assets/google.png"; 
+import googleLogo from "/google-logo.png"; 
 
 function LoginForm({ setIsLogin }) {
   return (
