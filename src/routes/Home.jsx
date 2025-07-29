@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { FaBook, FaFlask, FaGlobe, FaBrain, FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
