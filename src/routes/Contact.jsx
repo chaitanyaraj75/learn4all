@@ -1,20 +1,21 @@
+// Final Version: Enhanced Contact Page with
+// ✅ Light-Themed Left Panel
+// ✅ Form with Image on Left
+// ✅ Contact Info Section Retained
+// ✅ Extra Heading Above Form + Cute Message Inside Form
+
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
 import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
 import Feature from "../component/Feature";
+import { FaUser, FaEnvelope, FaCommentDots, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import { IoIosMail } from "react-icons/io";
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
-    });
-
-    const [popup, setPopup] = useState({
-        show: false,
-        message: "",
-        type: "", // 'success' or 'error'
-    });
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+    const [popup, setPopup] = useState({ show: false, message: "", type: "" });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,145 +23,144 @@ const Contact = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         if (formData.email.trim() !== "") {
             setPopup({ show: true, message: "Message sent successfully!", type: "success" });
         } else {
-            setPopup({ show: true, message: "Failed to send. Email is required.", type: "error" });
+            setPopup({ show: true, message: "Email is required!", type: "error" });
         }
-
-        // Hide popup after 3 seconds
-        setTimeout(() => {
-            setPopup({ show: false, message: "", type: "" });
-        }, 3000);
+        setTimeout(() => setPopup({ show: false, message: "", type: "" }), 3000);
     };
 
     return (
-        <div className="text-gray-800 bg-white min-h-screen ">
-            {/* Navbar */}
+        <div className="min-h-screen bg-white text-gray-800">
             <Navbar heading="Contact" />
 
-            {/* Contact Section */}
-            <div className="max-w-6xl mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-                    {/* Image (Left) */}
-                    <div>
+            {/* Popup */}
+            {popup.show && (
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`fixed top-6 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg text-white shadow-lg z-50 ${popup.type === "success" ? "bg-green-600" : "bg-red-600"
+                        }`}
+                >
+                    {popup.message}
+                </motion.div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2">
+                {/* Left Panel with Image and Info */}
+                <div className="relative flex flex-col justify-center bg-blue-100 text-gray-800 p-10 space-y-6">
+                    <div className="text-center">
+                        <TypeAnimation
+                            sequence={["Let’s Talk...", 1500, "We're Listening...", 1500]}
+                            wrapper="span"
+                            speed={50}
+                            repeat={Infinity}
+                            className="text-3xl font-bold"
+                        />
+                        <p className="mt-4 text-lg">We value your feedback and ideas </p>
+                    </div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                        className="flex justify-center"
+                    >
                         <img
                             src="http://jdmv.org.in/assets/img/contact.png"
                             alt="Contact Illustration"
-                            className="w-full max-w-sm"
+                            className="w-full max-w-xs drop-shadow-xl"
                         />
-                    </div>
+                    </motion.div>
 
-                    {/* Form (Right) */}
-                    <div className="relative">
-
-                        {/* Top Popup Message */}
-                        {popup.show && (
-                            <div
-                                className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-2 rounded shadow-md text-white z-50 ${popup.type === "success" ? "bg-green-500" : "bg-red-500"
-                                    }`}
-                            >
-                                {popup.message}
-                            </div>
-                        )}
-
-                        {/* Form */}
-                        <div className="flex justify-center items-center relative min-h-[80vh]">
-                            <div className="absolute w-[500px] h-[500px] bg-gray-100 rounded-full z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-
-                            <div className="relative z-10 w-full max-w-lg px-4">
-                                <h2 className="text-5xl font-bold text-blue-900 mb-4 text-center">Get in Touch</h2>
-                                <p className="mb-6 text-gray-600 text-center">We'd love to hear from you! Fill out the form and we'll get to you soon.</p>
-
-                                <form onSubmit={handleSubmit} className="space-y-4">
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-0"
-                                        required
-                                    />
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-0"
-                                        required
-                                    />
-                                    <textarea
-                                        name="message"
-                                        placeholder="Message"
-                                        rows="5"
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        className="w-full border border-gray-300 px-4 py-2 rounded focus:outline-none focus:ring-0"
-                                        required
-                                    />
-                                    <div className="flex justify-center">
-                                        <button
-                                            type="submit"
-                                            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-                                        >
-                                            Submit
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                {/* Contact Info Section */}
-                <div className="mt-16">
-                    <h3 className="text-3xl font-bold text-blue-900 mb-6 text-center">Contact Information</h3>
-                    <div className="space-y-4 text-lg max-w-2xl mx-auto">
-                        {/* Address  */}
-                        <div className="flex items-center space-x-3 hover:bg-blue-50 p-3 rounded-md transition cursor-pointer">
-                            <span className="text-xl">📍</span>
+                    {/* Contact Info */}
+                    <div className="text-lg space-y-3">
+                        <div className="flex items-center space-x-3 bg-white p-3 rounded-md shadow">
+                            <span className="text-xl"><FaMapMarkerAlt /></span>
                             <p>123 Learning St, Edu City, World</p>
                         </div>
-
-                        {/* Mobile Number*/}
-                        <div className="flex items-center space-x-3 hover:bg-blue-50 p-3 rounded-md transition cursor-pointer">
-                            <span className="text-xl">📞</span>
-                            <p className="transition-colors duration-200 hover:text-blue-600">
-                                +1 199-859-4850
-                            </p>
+                        <div className="flex items-center space-x-3 bg-white p-3 rounded-md shadow">
+                            <span className="text-xl"><FaPhoneAlt /></span>
+                            <p className="hover:text-blue-600 cursor-pointer">122-455-7390</p>
                         </div>
-
-                        {/* Email */}
-                        <div className="flex items-center space-x-3 hover:bg-blue-50 p-3 rounded-md transition cursor-pointer">
-                            <span className="text-xl">📧</span>
-                            <p className="transition-colors duration-200 hover:text-blue-600">
-                                info@etcrwall.com
-                            </p>
+                        <div className="flex items-center space-x-3 bg-white p-3 rounded-md shadow">
+                            <span className="text-xl"><IoIosMail />                            </span>
+                            <p className="hover:text-blue-600 cursor-pointer">info@email.com</p>
                         </div>
                     </div>
+                </div>
 
-
-
-                    {/* Feature Section */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-10 max-w-4xl mx-auto">
-                        <Feature icon="📞" label="24/7 Support" />
-                        <Feature icon="⚡" label="Quick Response" />
-                        <Feature icon="🌍" label="Worldwide Reach" />
-                        <Feature icon="🛠️" label="Tech Help Available" />
-                    </div>
+                {/* Form Section */}
+                <div className="relative flex flex-col items-center justify-center py-2 px-4">
+                    <h1 className="text-6xl font-bold text-blue-900 mb-16">Contact Us</h1>
+                    <motion.div
+                        initial={{ x: 100, opacity: 0 }}
+                        whileInView={{ x: 0, opacity: 1 }}
+                        transition={{ duration: 0.8 }}
+                        className="bg-white/30 backdrop-blur-xl p-8 rounded-xl shadow-2xl border border-white/20 w-full max-w-md z-10"
+                    >
+                        <h2 className="text-xl font-semibold text-blue-700 text-center mb-2">We are here to help you </h2>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div className="flex items-center border border-gray-300 rounded px-3 py-2 bg-white">
+                                <FaUser className="text-gray-400 mr-2" />
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Your Name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    className="w-full focus:outline-none"
+                                    required
+                                />
+                            </div>
+                            <div className="flex items-center border border-gray-300 rounded px-3 py-2 bg-white">
+                                <FaEnvelope className="text-gray-400 mr-2" />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Your Email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    className="w-full focus:outline-none"
+                                    required
+                                />
+                            </div>
+                            <div className="flex items-start border border-gray-300 rounded px-3 py-2 bg-white">
+                                <FaCommentDots className="text-gray-400 mt-2 mr-2" />
+                                <textarea
+                                    name="message"
+                                    placeholder="Your Message"
+                                    rows="4"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    className="w-full focus:outline-none resize-none"
+                                    required
+                                ></textarea>
+                            </div>
+                            <div className="text-center">
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    type="submit"
+                                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow-md transition"
+                                >
+                                    Submit
+                                </motion.button>
+                            </div>
+                            
+                        </form>
+                    </motion.div>
                 </div>
             </div>
 
-            {/* Footer */}
-            <Footer/>
+            {/* Features & Footer */}
+            <div className="max-w-6xl mx-auto px-4 py-10">
+                <Feature />
+            </div>
+            <Footer />
         </div>
     );
 };
-
-
 
 export default Contact;
