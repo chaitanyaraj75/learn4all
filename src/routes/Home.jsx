@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 // import Typed from "react-typed";
 import "./home.css";
+import Footer from "../component/Footer";
 
 const Home = () => {
   // const [menuOpen, setMenuOpen] = useState(false);
@@ -214,7 +215,7 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-green-800 text-white px-6 py-6 mt-10">
+      {/* <footer className="bg-green-800 text-white px-6 py-6 mt-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div>
             <h5 className="font-bold mb-2">Quick Links</h5>
@@ -229,7 +230,8 @@ const Home = () => {
           </div>
           <div className="text-3xl font-bold mt-4 md:mt-0">Learn4All</div>
         </div>
-      </footer>
+      </footer> */}
+      <Footer/>
     </div>
   );
 };
