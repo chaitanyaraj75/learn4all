@@ -153,3 +153,17 @@ body {
 .google-btn:hover {
   background-color: #e4e4e4;
 }
+
+/* Fix: Ensure white text is visible on dark bg */
+.auth-container * {
+  color: #c9d1d9;
+}
+
+/* Optional: Ensure background isn't full black */
+body {
+  background-color: #0f141b; /* slightly lighter than pure black */
+}
+
+.form-box {
+  background-color: #161b22;
+}

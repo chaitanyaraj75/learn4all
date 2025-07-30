@@ -5,23 +5,15 @@ import Footer from "../component/Footer";
 import googleLogo from "../assets/google.png"; // ✅ Ensure path is correct
 import "./Signup.css";
 import { useNavigate } from "react-router-dom";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../firebase";
 
 // ✅ Signup Form Component
 function SignupForm() {
   const navigate = useNavigate();
 
-  // 🔁 Google Sign Up Handler Function
-  const handleGoogleSignup = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("✅ Signed up with Google:", user);
-      navigate("/");
-    } catch (error) {
-      console.error("❌ Google Signup Error:", error);
-    }
+  // ✅ Dummy Google Signup Handler
+  const handleGoogleSignup = () => {
+    alert("Google Sign up is currently disabled.");
+    // navigate("/"); // You can still redirect if needed
   };
 
   return (
@@ -30,10 +22,10 @@ function SignupForm() {
         <h2 className="form-title">Create an Account</h2>
         <p className="form-subtitle">Free learning resources for all classes</p>
 
-        <input type="text" name="fullName" placeholder="Full Name" />
-        <input type="email" name="email" placeholder="Email" />
-        <input type="password" name="password" placeholder="Password" />
-        <input type="password" name="confirmPassword" placeholder="Confirm Password" />
+        <input type="text" name="fullName" placeholder="Full Name" className="form-input" />
+        <input type="email" name="email" placeholder="Email" className="form-input" />
+        <input type="password" name="password" placeholder="Password" className="form-input" />
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" className="form-input" />
 
         <button type="submit" className="primary-btn">Sign Up</button>
 
@@ -50,7 +42,7 @@ function SignupForm() {
           <img
             src={googleLogo}
             alt="Google"
-            style={{ width: "20px", marginRight: "8px" }}
+            className="google-logo"
           />
           Sign up with Google
         </button>

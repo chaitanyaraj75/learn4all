@@ -10,7 +10,6 @@ import "./App.css"; // You already imported it once; no need to import twice.
 function App() {
   return (
     <BrowserRouter>
-      {/* ✅ React Router v6 wrapper for all routes */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

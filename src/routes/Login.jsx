@@ -2,26 +2,10 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
-import { useNavigate } from "react-router-dom";
-import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../firebase";
-// import googleLogo from "../assets/google.png"; // ✅ Ensure correct path or replace
+import googleLogo from "../assets/google.png"; // ✅ Replace with correct path
+// import loginImg from "../assets/login-illustration.png"; // ✅ Add your own login illustration
 
-// ✅ LoginForm Component
 function LoginForm({ setIsLogin }) {
-  const navigate = useNavigate();
-
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("✅ Logged in with Google:", user);
-      navigate("/"); // redirect after login
-    } catch (error) {
-      console.error("❌ Google Login Error:", error);
-    }
-  };
-
   return (
     <div className="w-full max-w-md p-8 bg-white dark:bg-[#1e1e1e] rounded-xl shadow-md text-center">
       <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">Welcome Back!</h2>
@@ -54,18 +38,14 @@ function LoginForm({ setIsLogin }) {
 
       <div className="my-4 text-gray-400">OR</div>
 
-      <button
-        onClick={handleGoogleLogin}
-        className="flex items-center justify-center w-full border dark:border-gray-500 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-      >
-        {/* <img src={googleLogo} alt="Google" className="w-5 h-5 mr-2" /> */}
+      <button className="flex items-center justify-center w-full border dark:border-gray-500 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+        <img src={googleLogo} alt="Google" className="w-5 h-5 mr-2" />
         Login with Google
       </button>
     </div>
   );
 }
 
-// ✅ Full Login Page Component
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
 
@@ -79,22 +59,18 @@ function Login() {
 
       <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-[#121212] px-4">
         <div className="flex flex-col md:flex-row bg-white dark:bg-[#1c1c1c] shadow-xl rounded-lg overflow-hidden max-w-5xl w-full">
-          {/* Left Visual Image */}
+          {/* Left Image */}
           <div className="md:w-1/2 hidden md:flex items-center justify-center bg-gray-200 dark:bg-[#2a2a2a] p-8">
             <img
-              src="/login-illustration.png" // ✅ Replace with actual image path
+              src="/png"
               alt="Login Visual"
               className="w-full max-h-[400px] object-contain"
             />
           </div>
 
-          {/* Right Form Section */}
+          {/* Right Form */}
           <div className="w-full md:w-1/2 flex items-center justify-center p-8">
-            {isLogin ? (
-              <LoginForm setIsLogin={setIsLogin} />
-            ) : (
-              <p className="text-white text-lg">Signup form here</p>
-            )}
+            {isLogin ? <LoginForm setIsLogin={setIsLogin} /> : <p>Sign up form here</p>}
           </div>
         </div>
       </div>
