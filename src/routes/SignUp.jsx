@@ -6,11 +6,9 @@ import googleLogo from "../assets/google.png";
 import './Signup.css';
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../firebase"; 
+import { auth, provider } from "../firebase";
 
 function SignupForm() {
-  const navigate = useNavigate(); // ✅ Move this inside the component
-  function SignupForm() {
   const navigate = useNavigate();
 
   // 🔁 Google Sign Up Handler Function
@@ -19,15 +17,11 @@ function SignupForm() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       console.log("✅ Signed up with Google:", user);
-
-      // 🔀 Navigate to dashboard/home after signup
       navigate("/");
     } catch (error) {
       console.error("❌ Google Signup Error:", error);
     }
   };
-}
-
 
   return (
     <div className="form-box">
@@ -51,7 +45,7 @@ function SignupForm() {
 
         <div className="divider">OR</div>
 
-        <button className="google-btn" onClick={handleGoogleLogin}>
+        <button className="google-btn" onClick={handleGoogleSignup}>
           <img
             src={googleLogo}
             alt="Google"

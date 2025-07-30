@@ -3,7 +3,7 @@ const courseData = [
     videoId: "dQw4w9WgXcQ",
     title: "Mathematics - Numbers",
     subject: "Mathematics",
-    classLevel: "Class 1",
+    classLevel: "1",
     description: "Learn the basics of numbers and counting.",
     thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg",
     videoLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"

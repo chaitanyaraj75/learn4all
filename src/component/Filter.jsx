@@ -1,12 +1,12 @@
-function Filter({ onFilter }) {
-    const classes = ['Select', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
-    const subjects = ['Select', 'Math', 'Science', 'English', 'History', 'Geography', 'Computer', 'Physics', 'Chemistry', 'Biology'];
+function Filter(props) {
+    const classes = ['Select', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    const subjects = ['Select', 'Mathematics','Hindi', 'Science', 'English', 'History', 'Geography', 'Computer', 'Physics', 'Chemistry', 'Biology'];
 
     const handleFilter = (e) => {
         e.preventDefault();
         const classValue = e.target.class.value;
         const subjectValue = e.target.subject.value;
-        onFilter({ class: classValue, subject: subjectValue });
+        props.onclicked(classValue, subjectValue);
     };
 
     return (
@@ -28,7 +28,7 @@ function Filter({ onFilter }) {
                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         {classes.map((cls, index) => (
-                            <option key={index} value={cls}>
+                            <option key={index} value={(cls === 'Select' ? '' : cls)}>
                                 {cls}
                             </option>
                         ))}
@@ -48,7 +48,7 @@ function Filter({ onFilter }) {
                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                         {subjects.map((sub, index) => (
-                            <option key={index} value={sub}>
+                            <option key={index} value={(sub === 'Select' ? '' : sub)}>
                                 {sub}
                             </option>
                         ))}
