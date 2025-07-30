@@ -10,25 +10,25 @@ function Filter(props) {
     };
 
     return (
-        <section className="bg-white shadow-md p-4 rounded-xl w-full max-w-3xl mx-auto mt-6">
+        <section className="bg-[#1e1e2f] text-white shadow-lg p-6 rounded-2xl w-full max-w-4xl mx-auto mt-10">
             <form
                 onSubmit={handleFilter}
-                className="flex flex-col sm:flex-row sm:items-end gap-4"
+                className="flex flex-col sm:flex-row sm:items-end gap-6"
             >
                 <div className="flex-1">
                     <label
                         htmlFor="class"
-                        className="block text-sm font-medium text-gray-700 mb-1"
+                        className="block text-sm font-medium text-gray-200 mb-1"
                     >
                         Select Class:
                     </label>
                     <select
                         name="class"
                         id="class"
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full bg-[#2a2a40] border border-gray-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                     >
                         {classes.map((cls, index) => (
-                            <option key={index} value={(cls === 'Select' ? '' : cls)}>
+                            <option key={index} value={(cls === 'Select' ? '' : cls)} className="text-black">
                                 {cls}
                             </option>
                         ))}
@@ -38,27 +38,27 @@ function Filter(props) {
                 <div className="flex-1">
                     <label
                         htmlFor="subject"
-                        className="block text-sm font-medium text-gray-700 mb-1"
+                        className="block text-sm font-medium text-gray-200 mb-1"
                     >
                         Select Subject:
                     </label>
                     <select
                         name="subject"
                         id="subject"
-                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full bg-[#2a2a40] border border-gray-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
                     >
                         {subjects.map((sub, index) => (
-                            <option key={index} value={(sub === 'Select' ? '' : sub)}>
+                            <option key={index} value={(sub === 'Select' ? '' : sub)} className="text-black">
                                 {sub}
                             </option>
                         ))}
                     </select>
                 </div>
 
-                <div>
+                <div className="mt-1 sm:mt-0">
                     <button
                         type="submit"
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm py-2 px-5 rounded-md transition duration-200"
+                        className="bg-violet-600 hover:bg-violet-700 text-white font-semibold text-sm py-2 px-6 rounded-lg transition duration-200 shadow-md"
                     >
                         🔍 Filter
                     </button>

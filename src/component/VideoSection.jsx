@@ -4,7 +4,7 @@ import { PlayCircle } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import courseData from "../data/courseData";
+// import courseData from "../data/courseData";
 
 const VideoSection = () => {
   const [currentVideo, setCurrentVideo] = useState(videoSectionData[0]);
@@ -43,7 +43,7 @@ const VideoSection = () => {
   return (
     <section className="px-6 py-10 bg-gray-900 text-white min-h-screen">
       <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
-        📚 Course Summary
+        📚 Video Course
       </h2>
 
       {/* Filters */}
@@ -108,7 +108,7 @@ const VideoSection = () => {
               className={`w-full text-left flex items-start gap-3 px-4 py-3 rounded-lg transition duration-300 transform ${
                 currentVideo.videoId === video.videoId
                   ? "bg-blue-700 text-white font-semibold"
-                  : "bg-gray-800 hover:border-red-500 border border-transparent text-gray-300"
+                  : "bg-gray-800 hover:border-green-500 border-2 border-transparent text-gray-300"
               }`}
             >
               <PlayCircle size={20} />

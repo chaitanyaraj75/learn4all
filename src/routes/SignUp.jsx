@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
-import googleLogo from "/google-logo.png"; 
+// import  { useState } from "react";
 
 function SignupForm() {
   return (
@@ -23,11 +23,11 @@ function SignupForm() {
 
       <button className="google-btn">
         <img
-          src={googleLogo}
+          src="../assets/react.svg"
           alt="Google"
           style={{ width: "20px", marginRight: "8px" }}
         />
-        Sign up with Google
+        Login with Google+
       </button>
     </div>
   );

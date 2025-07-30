@@ -1,57 +1,106 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
 import Course_card from "../component/Course_card";
 import Filter from "../component/Filter";
+import coursedata from "../data/videodata";
 import { motion } from "framer-motion";
-import courseData from "../data/courseData.js";
-import coursedata from "../data/videodata.js";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import "./courses.css";
 
 function Courses() {
-  const [courses, setCourses] = React.useState(coursedata);
-  function filterCourses(className, subject) {
-    const filteredCourses = coursedata.filter((course) => {
-      return (
-        (className === "" || course.classLevel === className) &&
-        (subject === "" || course.subject === subject)
-      );
-    });
-    console.log(className,subject);
-    setCourses(filteredCourses);
-  }
+  const [courses, setCourses] = useState(coursedata);
+  const scrollRefs = useRef({});
+
+  const filterCourses = (className, subject) => {
+    const filtered = coursedata.filter(course =>
+      (className === "" || course.classLevel === className) &&
+      (subject === "" || course.subject === subject)
+    );
+    setCourses(filtered);
+  };
+
+  const scroll = (classLevel, direction) => {
+    const container = scrollRefs.current[classLevel];
+    if (container) {
+      container.scrollBy({ left: direction * 300, behavior: "smooth" });
+    }
+  };
+
+  const groupedCourses = courses.reduce((acc, course) => {
+    const { classLevel } = course;
+    if (!acc[classLevel]) acc[classLevel] = [];
+    acc[classLevel].push(course);
+    return acc;
+  }, {});
 
   return (
-    <div className="overflow-x-hidden bg-gray-100 min-h-screen">
+    <div className="bg-gradient-to-b from-[#100e1c] to-[#1b1532] min-h-screen text-white overflow-x-hidden">
       <Navbar heading="Courses" />
 
-      {/* Heading Section */}
-      <div className="text-center my-8">
-        <h1 className="text-blue-600 text-3xl md:text-4xl font-extrabold tracking-tight">
-          📚 Available Courses
-        </h1>
-      </div>
-
-      {/* Filter Component */}
-      <div className="flex justify-center mb-6">
-        <Filter 
-          onclicked= {filterCourses}
-        />
-      </div>
-
-      {/* Course Cards */}
-      <div className="flex flex-wrap justify-center gap-6 px-4 pb-10">
-        {courses.map((course, index) => (
-          <motion.div
-            key={course.id || course.videoId || index}
-            initial={{ opacity: 0, y: 30 }}
+      {/* Filter Section */}
+      <section className="py-6 px-4">
+        <div className="max-w-5xl mx-auto text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-bold leading-tight"
           >
-            <Course_card {...course} />
-          </motion.div>
+            Explore Video-Based Courses 🎓
+          </motion.h1>
+          <div className="mt-6">
+            <Filter onclicked={filterCourses} />
+          </div>
+        </div>
+      </section>
+
+      {/* Class-wise Course Listings */}
+      <section className="max-w-7xl mx-auto px-4 pb-16 space-y-12">
+        {Object.keys(groupedCourses).map((classLevel, idx) => (
+          <div key={idx} className="space-y-4">
+            <h2 className="text-2xl font-semibold text-white">Class {classLevel}</h2>
+            <div className="relative overflow-visible z-0">
+              <button
+                onClick={() => scroll(classLevel, -1)}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#2e254d] hover:bg-[#3d2f6c] p-2 rounded-full z-10"
+              >
+                <FaChevronLeft />
+              </button>
+
+              <div
+                ref={(el) => (scrollRefs.current[classLevel] = el)}
+                className="flex gap-4 overflow-x-auto overflow-visible no-scrollbar px-10 scroll-smooth relative z-0"
+              >
+                {groupedCourses[classLevel].map((course, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex-shrink-0 w-[250px]"
+                  >
+                    <Course_card {...course} />
+                  </motion.div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => scroll(classLevel, 1)}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#2e254d] hover:bg-[#3d2f6c] p-2 rounded-full z-10"
+              >
+                <FaChevronRight />
+              </button>
+            </div>
+          </div>
         ))}
-      </div>
+
+        {courses.length === 0 && (
+          <div className="text-center mt-20 text-gray-400 text-lg">
+            ⚠️ No courses found. Try another filter.
+          </div>
+        )}
+      </section>
 
       <Footer />
     </div>
