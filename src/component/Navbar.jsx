@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import Nav_item from "./Nav_item";
 import { Link } from "react-router-dom"; // ✅ IMPORT THIS
+//import { useTheme } from "../context/ThemeContext";
 
 function Navbar({ heading }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  //const { darkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {

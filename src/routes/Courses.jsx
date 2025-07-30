@@ -1,11 +1,26 @@
+import React from "react";
+import { useState } from "react";
 import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
 import Course_card from "../component/Course_card";
 import Filter from "../component/Filter";
 import { motion } from "framer-motion";
-import courseData from "../data/courseData"; // or "../data/courses" depending on your actual file
+import courseData from "../data/courseData.js";
+import coursedata from "../data/videodata.js";
 
 function Courses() {
+  const [courses, setCourses] = React.useState(coursedata);
+  function filterCourses(className, subject) {
+    const filteredCourses = coursedata.filter((course) => {
+      return (
+        (className === "" || course.classLevel === className) &&
+        (subject === "" || course.subject === subject)
+      );
+    });
+    console.log(className,subject);
+    setCourses(filteredCourses);
+  }
+
   return (
     <div className="overflow-x-hidden bg-gray-100 min-h-screen">
       <Navbar heading="Courses" />
@@ -19,12 +34,14 @@ function Courses() {
 
       {/* Filter Component */}
       <div className="flex justify-center mb-6">
-        <Filter />
+        <Filter 
+          onclicked= {filterCourses}
+        />
       </div>
 
       {/* Course Cards */}
       <div className="flex flex-wrap justify-center gap-6 px-4 pb-10">
-        {courseData.map((course, index) => (
+        {courses.map((course, index) => (
           <motion.div
             key={course.id || course.videoId || index}
             initial={{ opacity: 0, y: 30 }}
