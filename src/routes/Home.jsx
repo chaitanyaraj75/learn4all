@@ -38,9 +38,9 @@ const Home = () => {
   };
 
   const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
 const features = [
   {
     title: "Free Education",
