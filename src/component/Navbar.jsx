@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import Nav_item from "./Nav_item";
-import { Link } from "react-router-dom"; // ✅ IMPORT THIS
-//import { useTheme } from "../context/ThemeContext";
+import { Link } from "react-router-dom";
 
 function Navbar({ heading }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  //const { darkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,15 +34,15 @@ function Navbar({ heading }) {
           Learn4All
         </div>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 text-xl font-italic absolute left-1/2 transform -translate-x-1/2">
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex space-x-8 text-xl absolute left-1/2 transform -translate-x-1/2">
           <Nav_item heading={heading} title="Home" />
           <Nav_item heading={heading} title="Courses" />
           <Nav_item heading={heading} title="About" />
           <Nav_item heading={heading} title="Contact" />
         </ul>
 
-        {/* Right Side - Desktop */}
+        {/* Desktop Right Section */}
         <div className="hidden md:flex items-center space-x-4">
           <button
             onClick={toggleDarkMode}
@@ -94,7 +92,7 @@ function Navbar({ heading }) {
           {mobileOpen ? <FaTimes /> : <FaBars />}
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Navigation */}
         {mobileOpen && (
           <ul
             className={`absolute top-full left-0 w-full ${
