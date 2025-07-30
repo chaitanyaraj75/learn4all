@@ -9,7 +9,7 @@ import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter> {/* ✅ yeh wrapper zaroori hai */}
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
