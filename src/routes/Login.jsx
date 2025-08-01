@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "../component/Navbar";
 import Footer from "../component/Footer";
-import googleLogo from "../assets/google.png"; // ✅ Replace with correct path
+import googleLogo from "/google-logo.png"; // ✅ Replace with correct path
 // import loginImg from "../assets/login-illustration.png"; // ✅ Add your own login illustration
+import { useNavigate } from "react-router-dom";
+import "./Signup.css";
 
 function LoginForm({ setIsLogin }) {
+  const navigate = useNavigate();
   return (
     <div className="w-full max-w-md p-8 bg-white dark:bg-[#1e1e1e] rounded-xl shadow-md text-center">
       <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">Welcome Back!</h2>
@@ -29,7 +32,10 @@ function LoginForm({ setIsLogin }) {
       <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
         Don't have an account?{" "}
         <span
-          onClick={() => setIsLogin(false)}
+          onClick={() =>{
+             setIsLogin(false)
+             navigate("/signup");
+            }}
           className="text-orange-500 font-semibold cursor-pointer"
         >
           Sign up Now
@@ -38,7 +44,8 @@ function LoginForm({ setIsLogin }) {
 
       <div className="my-4 text-gray-400">OR</div>
 
-      <button className="flex items-center justify-center w-full border dark:border-gray-500 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+      {/* <button className="flex items-center justify-center w-full border dark:border-gray-500 py-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition"> */}
+      <button className="google-btn">
         <img src={googleLogo} alt="Google" className="w-5 h-5 mr-2" />
         Login with Google
       </button>
@@ -48,6 +55,11 @@ function LoginForm({ setIsLogin }) {
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  
+  // const toggleDarkMode = (dark) => {
+  //   setIsDark(dark);
+  // };
 
   return (
     <>
@@ -55,9 +67,12 @@ function Login() {
         <title>Login | Learn4All</title>
       </Helmet>
 
-      <Navbar />
+      <Navbar 
+      heading="login"
+      darkmode={setIsDark}
+      />
 
-      <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-[#121212] px-4">
+      <div className={`min-h-screen flex items-center justify-center px-4 ${isDark ? "bg-[#121212]" : "bg-gray-100"}`}>
         <div className="flex flex-col md:flex-row bg-white dark:bg-[#1c1c1c] shadow-xl rounded-lg overflow-hidden max-w-5xl w-full">
           {/* Left Image */}
           <div className="md:w-1/2 hidden md:flex items-center justify-center bg-gray-200 dark:bg-[#2a2a2a] p-8">

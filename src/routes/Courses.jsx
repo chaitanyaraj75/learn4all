@@ -11,6 +11,15 @@ import "./courses.css";
 function Courses() {
   const [courses, setCourses] = useState(coursedata);
   const scrollRefs = useRef({});
+  // const isDark=false;
+  const [isDark, setIsDark] = useState(false);
+
+  function toggleDarkMode(dark) {
+    setIsDark(dark);
+    // isDark=dark;
+    document.body.style.backgroundColor = !isDark ? "#121212" : "#f0f0f0";
+    document.body.style.color = isDark ? "#121212" : "#f0f0f0";
+  }
 
   const filterCourses = (className, subject) => {
     const filtered = coursedata.filter(course =>
@@ -35,9 +44,9 @@ function Courses() {
   }, {});
 
   return (
-    <div className="bg-gradient-to-b from-[#100e1c] to-[#1b1532] min-h-screen text-white overflow-x-hidden">
-      <Navbar heading="Courses" />
-
+    <div className={` min-h-screen  overflow-x-hidden ${isDark ? "bg-[#121212]" : "bg-gray-100"}`}>
+      <Navbar heading="Courses" darkmode={toggleDarkMode} />
+      
       {/* Filter Section */}
       <section className="py-6 px-4">
         <div className="max-w-5xl mx-auto text-center">
@@ -59,13 +68,13 @@ function Courses() {
       <section className="max-w-7xl mx-auto px-4 pb-16 space-y-12">
         {Object.keys(groupedCourses).map((classLevel, idx) => (
           <div key={idx} className="space-y-4">
-            <h2 className="text-2xl font-semibold text-white">Class {classLevel}</h2>
+            <h2 className="text-2xl font-semibold">Class {classLevel}</h2>
             <div className="relative overflow-visible z-0">
               <button
                 onClick={() => scroll(classLevel, -1)}
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#2e254d] hover:bg-[#3d2f6c] p-2 rounded-full z-10"
+                className={`absolute left-0 top-1/2 transform -translate-y-1/2 ${isDark ? "bg-[#2e254d] hover:bg-[#3d2f6c]" : "bg-[#d7d3e2] hover:bg-[#aba6bb]"}  p-2 rounded-full z-10`}
               >
-                <FaChevronLeft />
+              <FaChevronLeft />
               </button>
 
               <div
@@ -87,7 +96,7 @@ function Courses() {
 
               <button
                 onClick={() => scroll(classLevel, 1)}
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#2e254d] hover:bg-[#3d2f6c] p-2 rounded-full z-10"
+                className={`absolute right-0 top-1/2 transform -translate-y-1/2 ${isDark ? "bg-[#2e254d] hover:bg-[#3d2f6c]" : "bg-[#d7d3e2] hover:bg-[#aba6bb]"} p-2 rounded-full z-10`}
               >
                 <FaChevronRight />
               </button>

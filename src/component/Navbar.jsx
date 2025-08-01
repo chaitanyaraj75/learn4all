@@ -3,7 +3,7 @@ import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import Nav_item from "./Nav_item";
 import { Link } from "react-router-dom";
 
-function Navbar({ heading }) {
+function Navbar({ heading, darkmode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -19,7 +19,10 @@ function Navbar({ heading }) {
 
   const toggleDarkMode = () => {
     setIsDark(!isDark);
+    darkmode(!isDark);
     document.documentElement.classList.toggle("dark");
+    // document.body.classList.toggle("dark");
+    
   };
 
   return (
